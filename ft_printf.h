@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:51:03 by saich             #+#    #+#             */
-/*   Updated: 2019/11/15 19:47:41 by saich            ###   ########.fr       */
+/*   Updated: 2019/11/16 18:56:09 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,12 @@ int				check_form(char *format);
 int				print_and_count(t_tab tab, va_list *ap);
 char			*sp_malloc(int size);
 void			free_all(void *ptr);
+int				print_c(t_tab tab, va_list ap);
+int				print_s(t_tab tab, va_list ap);
+int				print_d(t_tab tab, va_list ap);
+int				print_u(t_tab tab, va_list ap);
+int				print_x(t_tab tab, va_list ap);
+int				print_percent(t_tab tab, va_list ap);
+int				print_p(t_tab tab, va_list ap);
 
 #endif

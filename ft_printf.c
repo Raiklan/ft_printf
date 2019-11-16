@@ -6,12 +6,10 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:45:12 by saich             #+#    #+#             */
-/*   Updated: 2019/11/15 18:44:34 by saich            ###   ########.fr       */
+/*   Updated: 2019/11/16 18:50:19 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <unistd.h>
 #include "ft_printf.h"
 
 static void	print_normal(char c, int *count)
@@ -20,23 +18,23 @@ static void	print_normal(char c, int *count)
 	*count = *count + 1;
 }
 
-static int	print(char *form, va_list *ap)
+static int	print(char *format, va_list *ap)
 {
 	int		i;
 	int		count;
-	t_tab	pl;
+	t_tab	tab;
 
 	i = 0;
 	count = 0;
-	while (form[i] != '\0')
+	while (format[i] != '\0')
 	{
-		if (form[i] == '%')
+		if (format[i] == '%')
 		{
-			form = form + make_pl(&pl, form + i + 1, ap);
-			count = count + print_and_count(pl, ap);
+			format = format + make_tab(&tab, format + i + 1, ap);
+			count = count + print_and_count(tab, ap);
 		}
 		else
-			print_normal(form[i], &count);
+			print_normal(format[i], &count);
 		i++;
 	}
 	return (count);
