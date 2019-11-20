@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 18:48:38 by saich             #+#    #+#             */
-/*   Updated: 2019/11/15 19:46:08 by saich            ###   ########.fr       */
+/*   Updated: 2019/11/16 19:55:43 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ static void	get_precision(t_tab *tab, char **format, va_list *ap)
 	int digit;
 
 	digit = 0;
-	while(!(check_conversion(format)))
+	while (!(check_conversion(format)))
 	{
-		if(ft_isdigit(**format))
+		if (ft_isdigit(**format))
 			digit = digit * 10 + (**format) - '0';
 		else if (**format == '*')
 		{

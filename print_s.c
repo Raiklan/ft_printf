@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 18:51:23 by saich             #+#    #+#             */
-/*   Updated: 2019/11/16 19:12:21 by saich            ###   ########.fr       */
+/*   Updated: 2019/11/16 19:55:39 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static	char	*copy_to_out(int size, int len, t_tab tab, char *str)
 	int		i;
 	int		space;
 
-	if(!(out = sp_malloc(size)))
+	if (!(out = sp_malloc(size)))
 		return (0);
 	i = 0;
 	if (tab.minus)
@@ -39,7 +39,7 @@ static	char	*copy_to_out(int size, int len, t_tab tab, char *str)
 	return (out);
 }
 
-int		print_s(t_tab tab, va_list ap)
+int				print_s(t_tab tab, va_list ap)
 {
 	char	*out;
 	char	*str;
@@ -54,7 +54,7 @@ int		print_s(t_tab tab, va_list ap)
 	size = (len > tab.min_w) ? len : tab.min_w;
 	if (!(out = copy_to_out(size, len, tab, str)))
 		return (0);
-	write (1, out, size);
+	write(1, out, size);
 	free_all(out);
 	return (size);
 }
