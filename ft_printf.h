@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:51:03 by saich             #+#    #+#             */
-/*   Updated: 2019/11/20 16:17:07 by saich            ###   ########.fr       */
+/*   Updated: 2019/11/20 16:21:59 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ int				print_d(t_tab tab, va_list ap);
 int				print_u(t_tab tab, va_list *ap);
 int				print_x(t_tab tab, va_list *ap);
 int				print_percent(t_tab tab, va_list ap);
-int				print_p(t_tab tab, va_list ap);
+int				print_p(t_tab tab, va_list *ap);
 
 #endif
