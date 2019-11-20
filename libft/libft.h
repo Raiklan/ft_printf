@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 10:52:15 by saich             #+#    #+#             */
-/*   Updated: 2019/10/18 15:24:01 by saich            ###   ########.fr       */
+/*   Updated: 2019/11/20 16:16:16 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void (*del)(void *));
 char			*ft_strjoinfree(char const *s1, char const *s2, int frees1,
 int frees2);
 char			*ft_itoa_base(int nbr, char *base);
+char			*ft_utoa_base(unsigned int n, char *base);
 
 #endif

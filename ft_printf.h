@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:51:03 by saich             #+#    #+#             */
-/*   Updated: 2019/11/16 19:55:48 by saich            ###   ########.fr       */
+/*   Updated: 2019/11/20 16:17:07 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "../LIBFT/libft.h"
+# include "libft.h"
 
 typedef struct	s_tab
 {
@@ -39,8 +39,8 @@ void			free_all(void *ptr);
 int				print_c(t_tab tab, va_list ap);
 int				print_s(t_tab tab, va_list ap);
 int				print_d(t_tab tab, va_list ap);
-int				print_u(t_tab tab, va_list ap);
-int				print_x(t_tab tab, va_list ap);
+int				print_u(t_tab tab, va_list *ap);
+int				print_x(t_tab tab, va_list *ap);
 int				print_percent(t_tab tab, va_list ap);
 int				print_p(t_tab tab, va_list ap);
 
