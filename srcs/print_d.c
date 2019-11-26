@@ -5,18 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/16 18:32:23 by saich             #+#    #+#             */
-/*   Updated: 2019/11/20 16:38:41 by saich            ###   ########.fr       */
+/*   Created: 2019/10/30 10:25:29 by wpark             #+#    #+#             */
+/*   Updated: 2019/11/26 17:25:38 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		print_sp(t_tab tab, int sign, char **out, int i)
+static void	print_pad(t_tab tab, int sign, char **ret, int i)
 {
 	if (tab.zero == 1 && tab.precise == -1)
 	{
-		if (sign && (*out)++)
+		if (sign && (*ret)++)
 			write(1, "-", 1);
 		while (i--)
 			write(1, "0", 1);
@@ -25,78 +25,83 @@ static void		print_sp(t_tab tab, int sign, char **out, int i)
 	{
 		while (i--)
 			write(1, " ", 1);
-		if (sign && (*out)++)
+		if (sign && (*ret)++)
 			write(1, "-", 1);
 	}
 }
 
-static int		print_d_with_minus(char *out, t_tab tab, int sign)
+static int	print_without_fminus(char *ret, t_tab tab, int sign)
 {
 	int		len;
-	int		tab_len;
+	int		p_len;
 	int		size;
 	int		i;
 	char	*begin;
 
-	begin = out;
-	len = ft_strlen(out) - sign;
-	if (tab.precise == 0 && *out == '0')
-		tab_len = 0;
+	begin = ret;
+	len = ft_strlen(ret) - sign;
+	if (tab.precise == 0 && *ret == '0')
+		p_len = 0;
 	else
-		tab_len = (len > tab.precise) ? len : tab.precise;
-	size = ((tab_len + sign > tab.min_w) ? tab_len + sign : tab.min_w);
-	if (sign)
-		write(1, &*out++, 1);
-	i = tab_len - len;
+		p_len = (len > tab.precise) ? len : tab.precise;
+	size = ((p_len + sign > tab.min_w) ? p_len + sign : tab.min_w);
+	i = size - p_len - sign;
+	print_pad(tab, sign, &ret, i);
+	i = p_len - len;
 	while (i-- > 0)
 		write(1, "0", 1);
-	if (tab_len != 0 || *out != '0')
-		write(1, out, len);
-	i = size - tab_len - sign;
+	if (p_len != 0 || *ret != '0')
+		write(1, ret, len);
+	free_all(begin);
+	return (size);
+}
+
+static int	print_with_fminus(char *ret, t_tab tab, int sign)
+{
+	int		len;
+	int		p_len;
+	int		size;
+	int		i;
+	char	*begin;
+
+	begin = ret;
+	len = ft_strlen(ret) - sign;
+	if (tab.precise == 0 && *ret == '0')
+		p_len = 0;
+	else
+		p_len = (len > tab.precise) ? len : tab.precise;
+	size = ((p_len + sign > tab.min_w) ? p_len + sign : tab.min_w);
+	if (sign)
+		write(1, &*ret++, 1);
+	i = p_len - len;
+	while (i-- > 0)
+		write(1, "0", 1);
+	if (p_len != 0 || *ret != '0')
+		write(1, ret, len);
+	i = size - p_len - sign;
 	while (i-- > 0)
 		write(1, " ", 1);
 	free_all(begin);
 	return (size);
 }
 
-static int		print_d_whithout_minus(char *out, t_tab tab, int sign)
+static int	print_res(char *ret, t_tab tab, int sign)
 {
-	char		*begin;
-	int			len;
-	int			size;
-	int			tab_len;
-	int			i;
-
-	begin = out;
-	len = ft_strlen(out) - sign;
-	if (tab.precise == 0 && *out == '0')
-		tab_len = 0;
+	if (tab.minus)
+		return (print_with_fminus(ret, tab, sign));
 	else
-		tab_len = (len > tab.precise) ? len : tab.precise;
-	size = ((tab_len + sign > tab.min_w) ? tab_len + sign : tab.min_w);
-	i = size - tab_len - sign;
-	print_sp(tab, sign, &out, i);
-	i = tab_len - len;
-	while (i-- > 0)
-		write(1, "0", 1);
-	if (tab_len != 0 || *out != '0')
-		write(1, out, len);
-	free_all(begin);
-	return (size);
+		return (print_without_fminus(ret, tab, sign));
 }
 
-int				print_d(t_tab tab, va_list *ap)
+int			print_d(t_tab tab, va_list *ap)
 {
-	int			digit;
-	char		*out;
-	int			sign;
+	char	*ret;
+	int		d;
+	int		sign;
 
-	digit = va_arg(*ap, int);
-	sign = (digit < 0) ? 1 : 0;
-	if (!(out = ft_itoa_base(digit, "0123456789")))
+	d = va_arg(*ap, int);
+	sign = (d < 0) ? 1 : 0;
+	if (!(ret = ft_itoa_base(d, "0123456789", 10)))
 		return (0);
-	if (tab.minus)
-		return (print_d_with_minus(out, tab, sign));
-	else
-		return (print_d_whithout_minus(out, tab, sign));
+	return (print_res(ret, tab, sign));
 }

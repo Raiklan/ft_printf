@@ -5,52 +5,52 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/15 17:45:12 by saich             #+#    #+#             */
-/*   Updated: 2019/11/16 19:55:49 by saich            ###   ########.fr       */
+/*   Created: 2019/10/21 13:03:30 by wpark             #+#    #+#             */
+/*   Updated: 2019/11/26 17:24:30 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	print_normal(char c, int *count)
+static void	print_normal(char c, int *cnt)
 {
 	write(1, &c, 1);
-	*count = *count + 1;
+	*cnt = *cnt + 1;
 }
 
-static int	print(char *format, va_list *ap)
+static int	print(char *f, va_list *ap)
 {
 	int		i;
-	int		count;
+	int		cnt;
 	t_tab	tab;
 
 	i = 0;
-	count = 0;
-	while (format[i] != '\0')
+	cnt = 0;
+	while (f[i] != '\0')
 	{
-		if (format[i] == '%')
+		if (f[i] == '%')
 		{
-			format = format + make_tab(&tab, format + i + 1, ap);
-			count = count + print_and_count(tab, ap);
+			f = f + make_tab(&tab, f + i + 1, ap);
+			cnt = cnt + print_and_count(tab, ap);
 		}
 		else
-			print_normal(format[i], &count);
+			print_normal(f[i], &cnt);
 		i++;
 	}
-	return (count);
+	return (cnt);
 }
 
-int			ft_printf(const char *format, ...)
+int			ft_printf(const char *form, ...)
 {
-	char	*form;
-	int		count;
+	char	*f;
+	int		cnt;
 	va_list	ap;
 
-	form = (char*)format;
-	if (!check_form(form))
+	f = (char*)form;
+	if (!check_form(f))
 		return (0);
-	va_start(ap, format);
-	count = print(form, &ap);
+	va_start(ap, form);
+	cnt = print(f, &ap);
 	va_end(ap);
-	return (count);
+	return (cnt);
 }

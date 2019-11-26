@@ -12,7 +12,7 @@ OBJLIB_PATH = ./obj
 SRC_NAME = ft_printf.c \
 		check.c \
 		tab_utils.c \
-		print_and_count_utils.c \
+		print_and_count.c \
 		print_c.c \
 		print_s.c \
 		print_p.c \
@@ -23,7 +23,7 @@ SRC_NAME = ft_printf.c \
 OBJ_NAME = $(SRC_NAME:.c=.o)
 LIB_NAME = ft_isdigit.c \
 		ft_strlen.c \
-		ft_itoa_base_bonus.c \
+		ft_itoa_base.c \
 		ft_utoa_base.c
 OBJLIB_NAME = $(LIB_NAME:.c=.o)
 

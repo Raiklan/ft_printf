@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/15 17:51:03 by saich             #+#    #+#             */
-/*   Updated: 2019/11/20 16:37:01 by saich            ###   ########.fr       */
+/*   Created: 2019/10/21 12:51:38 by wpark             #+#    #+#             */
+/*   Updated: 2019/11/26 17:23:14 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ typedef struct	s_tab
 	char		convert;
 }				t_tab;
 
-int				ft_printf(char const *format, ...);
-int				make_tab(t_tab *tab, char *format, va_list *ap);
+int				ft_printf(const char *form, ...);
+int				check_form(char *f);
 int				check_minus(char c);
 int				check_conversion(char c);
-int				check_form(char *format);
+int				make_tab(t_tab *tab, char *form, va_list *ap);
 int				print_and_count(t_tab tab, va_list *ap);
-char			*sp_malloc(int size);
-void			free_all(void *ptr);
-int				print_c(t_tab tab, va_list ap);
+int				print_c(t_tab tab, va_list *ap);
 int				print_s(t_tab tab, va_list *ap);
+int				print_p(t_tab tab, va_list *ap);
 int				print_d(t_tab tab, va_list *ap);
 int				print_u(t_tab tab, va_list *ap);
 int				print_x(t_tab tab, va_list *ap);
 int				print_percent(t_tab tab, va_list *ap);
-int				print_p(t_tab tab, va_list *ap);
+char			*sp_malloc(int size);
+void			free_all(void *ptr);
 
 #endif

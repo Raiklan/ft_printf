@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   aux_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wpark <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/15 19:20:48 by saich             #+#    #+#             */
-/*   Updated: 2019/11/15 19:31:48 by saich            ###   ########.fr       */
+/*   Created: 2019/10/29 11:20:51 by wpark             #+#    #+#             */
+/*   Updated: 2019/10/29 11:20:52 by wpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,27 @@ int			check_conversion(char c)
 	return (0);
 }
 
-int			check_form(char *format)
+int			check_form(char *f)
 {
-	int	count;
-	int check;
+	int	cnt;
+	int ck;
 
-	count = 0;
-	check = 0;
-	if (!format)
+	cnt = 0;
+	ck = 0;
+	if (!f)
 		return (0);
-	while (*format != '\0')
+	while (*f != '\0')
 	{
-		if (*format == '%' && check == 0)
-			check = 1;
-		else if (check_conversion(*format) && check == 1)
+		if (*f == '%' && ck == 0)
+			ck = 1;
+		else if (check_conversion(*f) && ck == 1)
 		{
-			check = 0;
-			count++;
+			ck = 0;
+			cnt++;
 		}
-		format++;
+		f++;
 	}
-	if (check == 1)
+	if (ck == 1)
 		return (0);
 	return (1);
 }

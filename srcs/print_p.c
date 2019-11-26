@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/16 18:51:09 by saich             #+#    #+#             */
-/*   Updated: 2019/11/20 16:19:45 by saich            ###   ########.fr       */
+/*   Created: 2019/10/29 16:52:31 by wpark             #+#    #+#             */
+/*   Updated: 2019/11/26 17:26:12 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ static void	print_res(char *ptr, t_tab tab, int sp)
 int			print_p(t_tab tab, va_list *ap)
 {
 	long	n;
-	char	*out;
+	char	*ret;
 	int		size;
 	int		len;
 
 	n = (unsigned long)va_arg(*ap, void*);
-	if (!(out = ft_itoa_base(n, "0123456789abcdef")))
+	if (!(ret = ft_itoa_base(n, "0123456789abcdef", 16)))
 		return (0);
-	if (tab.precise == 0 && *out == '0')
+	if (tab.precise == 0 && *ret == '0')
 		len = 0 + 2;
 	else
-		len = ft_strlen(out) + 2;
+		len = ft_strlen(ret) + 2;
 	size = (len > tab.min_w) ? len : tab.min_w;
-	print_res(out, tab, size - len);
-	free_all(out);
+	print_res(ret, tab, size - len);
+	free_all(ret);
 	return (size);
 }

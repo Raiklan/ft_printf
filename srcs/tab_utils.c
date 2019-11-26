@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/15 18:48:38 by saich             #+#    #+#             */
-/*   Updated: 2019/11/20 16:34:58 by saich            ###   ########.fr       */
+/*   Created: 2019/10/29 11:18:17 by wpark             #+#    #+#             */
+/*   Updated: 2019/11/26 17:29:42 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,29 @@ static void	init_pl(t_tab *tab)
 	tab->convert = 0;
 }
 
-static void	get_zero_minus(t_tab *tab, char **format, int *digit)
+static void	get_zpad_minus(t_tab *tab, char **form, int *digit)
 {
 	*digit = 0;
-	while (**format == '0' || **format == '-' || **format == ' ')
+	while (**form == '-' || **form == '0' || **form == ' ')
 	{
-		if (**format == '-')
+		if (**form == '-')
 			tab->minus = 1;
-		else if (**format == '0')
+		else if (**form == '0')
 			tab->zero = 1;
-		(**format)++;
+		(*form)++;
 	}
 }
 
-static void	get_min_w(t_tab *tab, char **format, va_list *ap)
+static void	get_min_w(t_tab *tab, char **form, va_list *ap)
 {
-	int digit;
+	int	digit;
 
-	get_zero_minus(tab, format, &digit);
-	while (**format != '.' && !check_conversion(**format))
+	get_zpad_minus(tab, form, &digit);
+	while (**form != '.' && !check_conversion(**form))
 	{
-		if (ft_isdigit(**format))
-			digit = digit * 10 + (**format) - '0';
-		else if (**format == '*')
+		if (ft_isdigit(**form))
+			digit = (digit * 10) + (**form - '0');
+		else if (**form == '*')
 		{
 			if ((tab->min_w = va_arg(*ap, int)) < 0)
 			{
@@ -59,40 +59,40 @@ static void	get_min_w(t_tab *tab, char **format, va_list *ap)
 				tab->min_w = digit;
 			digit = 0;
 		}
-		(*format)++;
+		(*form)++;
 	}
 	tab->min_w = (digit) ? digit : tab->min_w;
 }
 
-static void	get_precision(t_tab *tab, char **format, va_list *ap)
+static void	get_precision(t_tab *tab, char **form, va_list *ap)
 {
 	int digit;
 
 	digit = 0;
-	while (!(check_conversion(**format)))
+	while (!check_conversion(**form))
 	{
-		if (ft_isdigit(**format))
-			digit = digit * 10 + (**format) - '0';
-		else if (**format == '*')
+		if (ft_isdigit(**form))
+			digit = (digit * 10) + (**form - '0');
+		else if (**form == '*')
 		{
 			if ((tab->precise = va_arg(*ap, int)) < 0)
 				tab->precise = -1;
 			digit = tab->precise;
 		}
-		(**format)++;
+		(*form)++;
 	}
 	tab->precise = digit;
 }
 
-int			make_tab(t_tab *tab, char *format, va_list *ap)
+int			make_tab(t_tab *tab, char *form, va_list *ap)
 {
 	char	*begin;
 
-	begin = format;
+	begin = form;
 	init_pl(tab);
-	get_min_w(tab, &format, ap);
-	if (*format == '.')
-		get_precision(tab, &format, ap);
-	tab->convert = *format++;
-	return (format - begin);
+	get_min_w(tab, &form, ap);
+	if (*form == '.')
+		get_precision(tab, &form, ap);
+	tab->convert = *form++;
+	return (form - begin);
 }

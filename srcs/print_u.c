@@ -5,32 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/16 18:51:04 by saich             #+#    #+#             */
-/*   Updated: 2019/11/20 16:19:36 by saich            ###   ########.fr       */
+/*   Created: 2019/10/30 12:23:35 by wpark             #+#    #+#             */
+/*   Updated: 2019/11/26 17:28:36 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	set_size(t_tab tab, int *tab_len, int len, char *out)
+static int	set_size(t_tab tab, int *p_len, int len, char *ret)
 {
-	if (tab.precise == 0 && *out == '0')
-		*tab_len = 0;
+	if (tab.precise == 0 && *ret == '0')
+		*p_len = 0;
 	else
-		*tab_len = (len > tab.precise) ? len : tab.precise;
-	return ((*tab_len > tab.min_w) ? *tab_len : tab.min_w);
+		*p_len = (len > tab.precise) ? len : tab.precise;
+	return ((*p_len > tab.min_w) ? *p_len : tab.min_w);
 }
 
-static int	print_without_fminus(char *out, t_tab tab)
+static int	print_without_fminus(char *ret, t_tab tab)
 {
 	int len;
-	int tab_len;
+	int p_len;
 	int size;
 	int i;
 
-	len = ft_strlen(out);
-	size = set_size(tab, &tab_len, len, out);
-	i = size - tab_len;
+	len = ft_strlen(ret);
+	size = set_size(tab, &p_len, len, ret);
+	i = size - p_len;
 	while (i-- > 0)
 	{
 		if (tab.precise != -1)
@@ -40,51 +40,51 @@ static int	print_without_fminus(char *out, t_tab tab)
 		else
 			write(1, " ", 1);
 	}
-	i = tab_len - len;
+	i = p_len - len;
 	while (i-- > 0)
 		write(1, "0", 1);
-	if (tab_len != 0 || *out != '0')
-		write(1, out, len);
-	free_all(out);
+	if (p_len != 0 || *ret != '0')
+		write(1, ret, len);
+	free_all(ret);
 	return (size);
 }
 
-static int	print_with_fminus(char *out, t_tab tab)
+static int	print_with_fminus(char *ret, t_tab tab)
 {
 	int len;
-	int tab_len;
+	int p_len;
 	int size;
 	int i;
 
-	len = ft_strlen(out);
-	size = set_size(tab, &tab_len, len, out);
-	i = tab_len - len;
+	len = ft_strlen(ret);
+	size = set_size(tab, &p_len, len, ret);
+	i = p_len - len;
 	while (i-- > 0)
 		write(1, "0", 1);
-	if (tab_len != 0 || *out != '0')
-		write(1, out, len);
-	i = size - tab_len;
+	if (p_len != 0 || *ret != '0')
+		write(1, ret, len);
+	i = size - p_len;
 	while (i-- > 0)
 		write(1, " ", 1);
-	free_all(out);
+	free_all(ret);
 	return (size);
 }
 
-static int	print_res(char *out, t_tab tab)
+static int	print_res(char *ret, t_tab tab)
 {
 	if (tab.minus)
-		return (print_with_fminus(out, tab));
+		return (print_with_fminus(ret, tab));
 	else
-		return (print_without_fminus(out, tab));
+		return (print_without_fminus(ret, tab));
 }
 
 int			print_u(t_tab tab, va_list *ap)
 {
-	char			*out;
+	char			*ret;
 	unsigned int	u;
 
 	u = va_arg(*ap, unsigned int);
-	if (!(out = ft_utoa_base(u, "0123456789")))
+	if (!(ret = ft_utoa_base(u, "0123456789", 10)))
 		return (0);
-	return (print_res(out, tab));
+	return (print_res(ret, tab));
 }
