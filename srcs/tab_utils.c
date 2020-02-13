@@ -6,13 +6,13 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 11:18:17 by wpark             #+#    #+#             */
-/*   Updated: 2019/11/26 17:29:42 by saich            ###   ########.fr       */
+/*   Updated: 2019/11/26 18:00:40 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	init_pl(t_tab *tab)
+static void	init_tab(t_tab *tab)
 {
 	tab->minus = 0;
 	tab->zero = 0;
@@ -22,7 +22,7 @@ static void	init_pl(t_tab *tab)
 	tab->convert = 0;
 }
 
-static void	get_zpad_minus(t_tab *tab, char **form, int *digit)
+static void	get_zero_minus(t_tab *tab, char **form, int *digit)
 {
 	*digit = 0;
 	while (**form == '-' || **form == '0' || **form == ' ')
@@ -39,7 +39,7 @@ static void	get_min_w(t_tab *tab, char **form, va_list *ap)
 {
 	int	digit;
 
-	get_zpad_minus(tab, form, &digit);
+	get_zero_minus(tab, form, &digit);
 	while (**form != '.' && !check_conversion(**form))
 	{
 		if (ft_isdigit(**form))
@@ -89,7 +89,7 @@ int			make_tab(t_tab *tab, char *form, va_list *ap)
 	char	*begin;
 
 	begin = form;
-	init_pl(tab);
+	init_tab(tab);
 	get_min_w(tab, &form, ap);
 	if (*form == '.')
 		get_precision(tab, &form, ap);

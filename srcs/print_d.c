@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 10:25:29 by wpark             #+#    #+#             */
-/*   Updated: 2019/11/26 17:25:38 by saich            ###   ########.fr       */
+/*   Updated: 2019/11/29 13:52:13 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	print_pad(t_tab tab, int sign, char **ret, int i)
 	}
 }
 
-static int	print_without_fminus(char *ret, t_tab tab, int sign)
+static int	print_without_minus(char *ret, t_tab tab, int sign)
 {
 	int		len;
 	int		p_len;
@@ -56,7 +56,7 @@ static int	print_without_fminus(char *ret, t_tab tab, int sign)
 	return (size);
 }
 
-static int	print_with_fminus(char *ret, t_tab tab, int sign)
+static int	print_with_minus(char *ret, t_tab tab, int sign)
 {
 	int		len;
 	int		p_len;
@@ -88,9 +88,9 @@ static int	print_with_fminus(char *ret, t_tab tab, int sign)
 static int	print_res(char *ret, t_tab tab, int sign)
 {
 	if (tab.minus)
-		return (print_with_fminus(ret, tab, sign));
+		return (print_with_minus(ret, tab, sign));
 	else
-		return (print_without_fminus(ret, tab, sign));
+		return (print_without_minus(ret, tab, sign));
 }
 
 int			print_d(t_tab tab, va_list *ap)

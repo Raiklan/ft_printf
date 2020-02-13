@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:51:38 by wpark             #+#    #+#             */
-/*   Updated: 2019/11/26 17:23:14 by saich            ###   ########.fr       */
+/*   Updated: 2020/02/11 17:30:16 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int				print_u(t_tab tab, va_list *ap);
 int				print_x(t_tab tab, va_list *ap);
 int				print_percent(t_tab tab, va_list *ap);
 char			*sp_malloc(int size);
+char			*zero_malloc(int size);
 void			free_all(void *ptr);
 
 #endif

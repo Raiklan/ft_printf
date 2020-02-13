@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 21:26:02 by wpark             #+#    #+#             */
-/*   Updated: 2019/11/26 17:26:34 by saich            ###   ########.fr       */
+/*   Updated: 2020/02/11 18:40:04 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ int	print_percent(t_tab tab, va_list *ap)
 	(void)ap;
 	if (!tab.min_w)
 		tab.min_w = 1;
-	if (!(ret = sp_malloc(tab.min_w)))
+	if (tab.zero == 1)
+	{
+		if (!(ret = zero_malloc(tab.min_w)))
+			return (0);
+	}
+	else if (!(ret = sp_malloc(tab.min_w)))
 		return (0);
 	if (tab.minus)
 		ret[0] = '%';

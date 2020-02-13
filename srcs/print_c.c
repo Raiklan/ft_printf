@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 11:27:31 by wpark             #+#    #+#             */
-/*   Updated: 2019/11/26 17:24:52 by saich            ###   ########.fr       */
+/*   Updated: 2020/02/11 17:31:06 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ int	print_c(t_tab tab, va_list *ap)
 	c = va_arg(*ap, int);
 	if (!tab.min_w)
 		tab.min_w = 1;
-	if (!(ret = sp_malloc(tab.min_w)))
+	if (tab.zero)
+	{
+		if (!(ret = zero_malloc(tab.min_w)))
+			return (0);
+	}
+	else if (!(ret = sp_malloc(tab.min_w)))
 		return (0);
 	if (tab.minus)
 		ret[0] = c;
