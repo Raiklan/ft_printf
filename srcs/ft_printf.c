@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 13:03:30 by wpark             #+#    #+#             */
-/*   Updated: 2019/11/26 18:13:24 by saich            ###   ########.fr       */
+/*   Updated: 2020/02/14 14:54:32 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,35 @@ static int	print(char *f, va_list *ap)
 	return (count);
 }
 
+static void print_invalidform(char c, int *count)
+{
+	if (c != '%')
+	{
+		write(1, &c, 1);
+		*count = *count + 1;
+	}
+}
+
 int			ft_printf(const char *form, ...)
 {
 	char	*f;
 	int		count;
+	int		i;
 	va_list	ap;
 
 	f = (char*)form;
 	if (!check_form(f))
-		return (-1);
+	{
+		f = (char*)form;
+		count = 0;
+		i = 0;
+		while (f[i] != '\0')
+		{
+			print_invalidform(f[i], &count);
+			i++;
+		}
+		return (count);
+	}
 	va_start(ap, form);
 	count = print(f, &ap);
 	va_end(ap);
