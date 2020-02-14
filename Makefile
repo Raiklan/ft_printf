@@ -47,7 +47,7 @@ $(OBJLIB_PATH)/%.o: $(LIB_PATH)/%.c
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	@rm -rf $(OBJ) $(OBJLIB)
+	@rm -rf $(OBJ_PATH)
 
 fclean: clean
 	@rm -rf ./obj $(NAME)

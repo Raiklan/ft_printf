@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 16:52:31 by wpark             #+#    #+#             */
-/*   Updated: 2020/02/13 16:11:47 by saich            ###   ########.fr       */
+/*   Updated: 2020/02/14 14:26:08 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 static void	print_ptr(char *ptr, t_tab tab)
 {
+	int i;
+
+	i = tab.precise;
 	if (tab.precise != 0 || *ptr != '0')
 		write(1, ptr, ft_strlen(ptr));
+	i -= ft_strlen(ptr);
+	while(i-- > 0)
+		write(1, "0", 1);
 }
 
 static void	print_res_with_minus(char *ptr, t_tab tab, int sp)
@@ -72,7 +78,7 @@ int			print_p(t_tab tab, va_list *ap)
 	else
 	{
 		len = ft_strlen(ret) + 2;
-		p_len = (len > tab.precise) ? len : tab.precise;
+		p_len = (len > tab.precise + 2) ? len : tab.precise + 2;
 	}
 	size = (p_len > tab.min_w) ? p_len : tab.min_w;
 	print_res(ret, tab, size - p_len);
