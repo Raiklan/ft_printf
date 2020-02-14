@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpark <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 09:37:28 by wpark             #+#    #+#             */
-/*   Updated: 2019/10/30 09:37:29 by wpark            ###   ########.fr       */
+/*   Updated: 2020/02/14 22:54:33 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static int	len_nbr_by_base(unsigned long nbr, int b_len)
 {
-	int cnt;
+	int count;
 
 	if (nbr == 0)
 		return (1);
-	cnt = 0;
+	count = 0;
 	while (nbr > 0)
 	{
 		nbr = nbr / b_len;
-		cnt++;
+		count++;
 	}
-	return (cnt);
+	return (count);
 }
 
 static void	put_null_and_sign(char *res, int len, int sign)

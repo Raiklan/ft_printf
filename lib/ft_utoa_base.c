@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpark <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 12:27:10 by wpark             #+#    #+#             */
-/*   Updated: 2019/10/30 12:27:11 by wpark            ###   ########.fr       */
+/*   Updated: 2020/02/14 23:11:36 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static int	len_nbr_by_base(unsigned int nbr, int b_len)
 {
-	int cnt;
+	int count;
 
 	if (nbr == 0)
 		return (1);
-	cnt = 0;
+	count = 0;
 	while (nbr > 0)
 	{
 		nbr = nbr / b_len;
-		cnt++;
+		count++;
 	}
-	return (cnt);
+	return (count);
 }
 
 char		*ft_utoa_base(unsigned int n, char *base, int b_len)

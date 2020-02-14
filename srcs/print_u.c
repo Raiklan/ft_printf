@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 12:23:35 by wpark             #+#    #+#             */
-/*   Updated: 2019/11/26 17:28:36 by saich            ###   ########.fr       */
+/*   Updated: 2020/02/14 23:11:46 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	set_size(t_tab tab, int *p_len, int len, char *ret)
 	return ((*p_len > tab.min_w) ? *p_len : tab.min_w);
 }
 
-static int	print_without_fminus(char *ret, t_tab tab)
+static int	print_without_minus(char *ret, t_tab tab)
 {
 	int len;
 	int p_len;
@@ -49,7 +49,7 @@ static int	print_without_fminus(char *ret, t_tab tab)
 	return (size);
 }
 
-static int	print_with_fminus(char *ret, t_tab tab)
+static int	print_with_minus(char *ret, t_tab tab)
 {
 	int len;
 	int p_len;
@@ -73,9 +73,9 @@ static int	print_with_fminus(char *ret, t_tab tab)
 static int	print_res(char *ret, t_tab tab)
 {
 	if (tab.minus)
-		return (print_with_fminus(ret, tab));
+		return (print_with_minus(ret, tab));
 	else
-		return (print_without_fminus(ret, tab));
+		return (print_without_minus(ret, tab));
 }
 
 int			print_u(t_tab tab, va_list *ap)
