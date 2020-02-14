@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 11:20:51 by wpark             #+#    #+#             */
-/*   Updated: 2020/02/14 15:17:21 by saich            ###   ########.fr       */
+/*   Updated: 2020/02/14 18:37:33 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,26 @@ int			check_form(char *f)
 {
 	int check;
 	int check_inv;
+	int	i;
 
 	check = 0;
+	i = 0;
+	check_inv = 0;
 	if (!f)
 		return (0);
-	while (*f != '\0')
+	while (f[i] != '\0')
 	{
-		if (*f == '%' && check == 0)
+		if (f[i] == '%' && check == 0)
+		{
 			check = 1;
-		else if (check_conversion(*f) && check == 1)
+			if (f[i + 1] != '\0' && !ft_isdigit(f[i + 1]) 
+			&& !check_conversion(f[i + 1]) && f[i + 1] != '-' 
+			&& f[i + 1] != '*' && f[i + 1] != '.')
+				check_inv = 1;
+		}
+		else if (check_conversion(f[i]) && check == 1)
 			check = 0;
-		else if (!ft_isdigit(*f) && !check_conversion(*f) && *f != '-' 
-		&& *f != '*' && *f != '.')
-			check_inv = 1;
-		f++;
+		i++;
 	}
 	if (check == 1 || check_inv == 1)
 		return (0);
