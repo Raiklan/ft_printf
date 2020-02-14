@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 11:18:17 by wpark             #+#    #+#             */
-/*   Updated: 2020/02/14 22:44:44 by saich            ###   ########.fr       */
+/*   Updated: 2020/02/14 23:28:27 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	init_tab(t_tab *tab)
 static void	get_zero_minus(t_tab *tab, char **form, int *digit)
 {
 	*digit = 0;
-	while (**form == '-' || **form == '0' || **form == ' ')
+	while (**form == '-' || **form == '0')
 	{
 		if (**form == '-')
 			tab->minus = 1;
