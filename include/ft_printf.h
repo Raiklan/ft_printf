@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:51:38 by wpark             #+#    #+#             */
-/*   Updated: 2020/02/11 17:30:16 by saich            ###   ########.fr       */
+/*   Updated: 2020/02/14 22:44:55 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct	s_tab
 {
 	int			minus;
 	int			zero;
-	int			dot;
 	int			min_w;
 	int			precise;
 	char		convert;

@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 11:18:17 by wpark             #+#    #+#             */
-/*   Updated: 2020/02/14 14:24:41 by saich            ###   ########.fr       */
+/*   Updated: 2020/02/14 22:44:44 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	init_tab(t_tab *tab)
 {
 	tab->minus = 0;
 	tab->zero = 0;
-	tab->dot = 0;
 	tab->min_w = 0;
 	tab->precise = -1;
 	tab->convert = 0;
